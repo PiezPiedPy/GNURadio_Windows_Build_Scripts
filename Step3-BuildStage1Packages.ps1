@@ -509,18 +509,18 @@ if (Test-Path $root/src-stage1-dependencies/Qt4/Makefile)
 nmake confclean 2>&1 >> $Log
 # debugDLL build
 MakeQT "DebugDLL"
-# releaseDLL build
-MakeQT "ReleaseDLL"
 # debug static build
-MakeQT "Debug"
+# MakeQT "Debug"
 # switch to AVX2 mode
 # release AVX2 static build
-MakeQT "Release-AVX2"
+# MakeQT "Release-AVX2"
 # release AVX2 DLL build
 MakeQT "ReleaseDLL-AVX2"
 # do release last because that's the "default" config, and qmake does some strange things
 # like save the last config persistently and globally.
-MakeQT "Release"
+# MakeQT "Release"
+# releaseDLL build
+MakeQT "ReleaseDLL"
 
 #clean up enormous amount of temp files
 nmake clean  2>&1>> $Log
@@ -528,10 +528,7 @@ nmake clean  2>&1>> $Log
 
 Validate "build/DebugDLL/bin/qmake.exe" "build/DebugDLL/lib/QtCored4.dll" "build/DebugDLL/lib/QtOpenGLd4.dll" "build/DebugDLL/lib/QtSvgd4.dll" "build/DebugDLL/lib/QtGuid4.dll" `
 	"build/Releasedll/bin/qmake.exe" "build/Releasedll/lib/QtCore4.dll" "build/Releasedll/lib/QtOpenGL4.dll" "build/Releasedll/lib/QtSvg4.dll" "build/Releasedll/lib/QtGui4.dll" `
-	"build/Releasedll-AVX2/bin/qmake.exe" "build/Releasedll-AVX2/lib/QtCore4.dll" "build/Releasedll-AVX2/lib/QtOpenGL4.dll" "build/Releasedll-AVX2/lib/QtSvg4.dll" "build/Releasedll-AVX2/lib/QtGui4.dll" `
-	"build/Release-AVX2/bin/qmake.exe" "build/Release-AVX2/lib/QtCore.lib" "build/Release-AVX2/lib/QtOpenGL.lib" "build/Release-AVX2/lib/QtSvg.lib" "build/Release-AVX2/lib/QtGui.lib" `
-	"build/Release/bin/qmake.exe" "build/Release/lib/QtCore.lib" "build/Release/lib/QtOpenGL.lib" "build/Release/lib/QtSvg.lib" "build/Release/lib/QtGui.lib" `
-	"build/Debug/bin/qmake.exe" "build/Debug/lib/QtCored.lib" "build/Debug/lib/QtOpenGLd.lib" "build/Debug/lib/QtSvgd.lib" "build/Debug/lib/QtGuid.lib" 
+	"build/Releasedll-AVX2/bin/qmake.exe" "build/Releasedll-AVX2/lib/QtCore4.dll" "build/Releasedll-AVX2/lib/QtOpenGL4.dll" "build/Releasedll-AVX2/lib/QtSvg4.dll" "build/Releasedll-AVX2/lib/QtGui4.dll" 
 
 # ____________________________________________________________________________________________________________
 # Qt5
@@ -584,6 +581,8 @@ MakeQT5 "ReleaseDLL-AVX2"
 #MakeQT5 "Debug"
 #MakeQT5 "Release-AVX2"
 #MakeQT5 "Release"
+$env:CL = $oldCL
+$ErrorActionPreference = "Stop"
 
 # ____________________________________________________________________________________________________________
 # QWT 5.2.3
